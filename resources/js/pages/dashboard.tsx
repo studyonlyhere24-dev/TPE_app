@@ -57,12 +57,17 @@ export default function Dashboard({ auth, contrats }) {
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 flex gap-2">
-                                                    <button className="text-indigo-600 hover:text-indigo-900 font-medium">Consulter</button>
 <a 
     href={`/contrats/${contrat.id}/pdf`} 
     className="text-red-600 hover:text-red-900 font-medium"
 >
-    Générer PV
+    Consulter PDF
+</a>
+<a 
+    href={`/pv/${contrat.id}/pdf`} 
+    className="text-blue-600 hover:text-blue-900 font-medium"
+>
+    PV PDF
 </a>                                                </td>
                                             </tr>
                                         ))

@@ -2,192 +2,220 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>PV d'installation - {{ $contrat->numero_contrat }}</title>
+    <title>Contrat N° {{ $contrat->numero_contrat }}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            font-size: 11px; /* Petite police pour tout faire rentrer */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            color: #000;
             margin: 0;
             padding: 0;
         }
+        /* Utilitaires pour imiter le design */
+        .checkbox {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #000;
+            text-align: center;
+            line-height: 14px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .ligne-pointillee {
+            border-bottom: 2px dotted #000;
+        }
+        .ligne-continue {
+            border-bottom: 1px solid #000;
+        }
+        .font-mono {
+            font-family: "Courier New", Courier, monospace;
+        }
+        /* Structure de base */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 8px;
         }
-        th, td {
-            border: 1px solid black;
-            padding: 4px 6px;
-            vertical-align: top;
+        td {
+            padding: 5px 0;
+            vertical-align: bottom;
         }
-        .section-header {
-            background-color: black;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            font-size: 12px;
+        .label {
+            padding-right: 10px;
+            white-space: nowrap;
         }
-        .signature-box {
-            height: 100px; /* Espace pour le cachet et la signature */
+        .cadre-principal {
+            border: 1px solid #000;
+            padding: 15px 25px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <table>
+    <table style="margin-bottom: 10px;">
         <tr>
-            <td style="width: 50%;">Identifiant terminal : </td>
-            <td style="width: 50%;">N° de caisse : </td>
-        </tr>
-    </table>
+            <td style="width: 50%; vertical-align: top; padding-right: 40px;">
+                
+                <div style="margin-bottom: 25px; margin-left: 20px;">
+                    <span style="font-size: 16px; font-weight: bold;">
+                        <span class="checkbox">{{ $contrat->type_contrat == 'Création' ? 'X' : '' }}</span> Création
+                    </span>
+                    <span style="display: inline-block; width: 30px;"></span>
+                    <span style="font-size: 16px; font-weight: bold;">
+                        <span class="checkbox">{{ $contrat->type_contrat == 'Modification' ? 'X' : '' }}</span> Modification
+                    </span>
+                </div>
 
-    <table>
-        <tr>
-            <td colspan="2" class="section-header">Coordonnées de l'acceptant CIB (Commerçant ou Prestataire de services)</td>
-        </tr>
-        <tr>
-            <td style="width: 50%;">Nom : </td>
-            <td style="width: 50%;">Enseigne : {{ $contrat->client ? $contrat->client->raison_sociale : '' }}</td>
-        </tr>
-        <tr>
-            <td>Prénom : </td>
-            <td>Domaine d'activité : </td>
-        </tr>
-        <tr>
-            <td>Adresse : </td>
-            <td>N° Commerçant : {{ $contrat->numero_contrat }}</td>
-        </tr>
-        <tr>
-            <td>Commune : </td>
-            <td>Téléphone fixe : </td>
-        </tr>
-        <tr>
-            <td>Daïra : </td>
-            <td>Téléphone mobile : </td>
-        </tr>
-        <tr>
-            <td>Wilaya : </td>
-            <td>Fax : </td>
-        </tr>
-    </table>
+                <div style="border: 2px solid #000; padding: 10px; width: 80%; height: 60px;">
+                    <div style="font-weight: bold; font-size: 14px; margin-bottom: 15px;">N° de Contrat</div>
+                    <div class="ligne-continue font-mono" style="text-align: center; font-size: 18px; letter-spacing: 5px;">
+                        {{ $contrat->numero_contrat }}
+                    </div>
+                </div>
 
-    <table>
-        <tr>
-            <td colspan="2" class="section-header">Coordonnées du technicien (DRE) chargé de l'installation</td>
-        </tr>
-        <tr>
-            <td style="width: 50%;">Nom : </td>
-            <td style="width: 50%;">Direction : </td>
-        </tr>
-        <tr>
-            <td>Prénom : </td>
-            <td>Adresse : </td>
-        </tr>
-        <tr>
-            <td>Téléphone fixe : </td>
-            <td>Ville : </td>
-        </tr>
-        <tr>
-            <td>Téléphone mobile : </td>
-            <td>Wilaya : </td>
-        </tr>
-    </table>
-
-    <table>
-        <tr>
-            <td colspan="2" class="section-header">Coordonnées de l'établissement Bancaire acquéreur & du Contact</td>
-        </tr>
-        <tr>
-            <td style="width: 50%;">Banque : </td>
-            <td style="width: 50%;">Nom du contact agence : </td>
-        </tr>
-        <tr>
-            <td>Code Agence : </td>
-            <td>Prénom du contact agence : </td>
-        </tr>
-        <tr>
-            <td>Adresse : </td>
-            <td>Fonction du contact agence : </td>
-        </tr>
-        <tr>
-            <td>Ville : </td>
-            <td>Tél. fixe du contact agence : </td>
-        </tr>
-        <tr>
-            <td>Wilaya & code postal : </td>
-            <td>Tél. mobile du contact agence : </td>
-        </tr>
-        <tr>
-            <td>Téléphone : </td>
-            <td>Fax de l'agence : </td>
-        </tr>
-    </table>
-
-    <table>
-        <tr>
-            <td colspan="2" class="section-header">Equipement installé</td>
-        </tr>
-        <tr>
-            <td style="width: 50%;">Modèle TPE : {{ $contrat->type_tpe }}</td>
-            <td style="width: 50%;">
-                Modèle Base : <br><br>
-                N° de Série Base : 
             </td>
-        </tr>
-        <tr>
-            <td>N° de Série TPE : </td>
-            <td>Opérateur télécom : Djezzy <span style="margin: 0 10px;">Ooredoo</span> Mobilis</td>
-        </tr>
-        <tr>
-            <td>N° SIM : </td>
-            <td></td>
-        </tr>
-    </table>
 
-    <table>
-        <tr>
-            <td colspan="4" class="section-header">Détail composants matériels livrés</td>
-        </tr>
-        <tr style="font-weight: bold; background-color: #f0f0f0;">
-            <td style="width: 40%;">Description du composant</td>
-            <td style="width: 10%;">Nbre</td>
-            <td style="width: 40%;">Description du composant</td>
-            <td style="width: 10%;">Nbre</td>
-        </tr>
-        <tr>
-            <td>Terminal de paiement électronique (TPE)</td><td>01</td>
-            <td>Rouleau papier :</td><td>01</td>
-        </tr>
-        <tr>
-            <td>Cordon de ligne téléphonique</td><td>00</td>
-            <td>Bloc d'alimentation</td><td>01</td>
-        </tr>
-        <tr>
-            <td>Vitrophanie</td><td>01</td>
-            <td>Cordon d'alimentation</td><td>01</td>
-        </tr>
-        <tr>
-            <td>Base TPE</td><td>00</td>
-            <td>SIM GPRS</td><td>01</td>
-        </tr>
-    </table>
-
-    <table>
-        <tr>
-            <td style="width: 50%;" class="section-header">Visa Commerçant</td>
-            <td style="width: 50%;" class="section-header">Visa installateur de la banque</td>
-        </tr>
-        <tr>
-            <td class="signature-box">
-                Fait à ...................................... le : <br><br>
-                Signature et cachet du commerçant
-            </td>
-            <td class="signature-box">
-                Fait à ...................................... le : <br><br>
-                Signature et cachet de l'installateur :
+            <td style="width: 50%; vertical-align: top;">
+                <table>
+                    <tr>
+                        <td class="label" style="width: 80px;">Date</td>
+                        <td class="ligne-pointillee">{{ $contrat->date_contrat ? \Carbon\Carbon::parse($contrat->date_contrat)->format('d/m/Y') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">DRE</td>
+                        <td class="ligne-pointillee">{{ $contrat->dre }}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Agence</td>
+                        <td class="ligne-pointillee">{{ $contrat->agence }}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Code agence</td>
+                        <td class="ligne-pointillee">{{ $contrat->code_agence }}</td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
+
+
+    <div class="cadre-principal">
+        
+        <table>
+            <tr><td class="label" style="width: 120px;">Raison sociale :</td><td class="ligne-continue">{{ $contrat->client->raison_sociale ?? '' }}</td></tr>
+            <tr><td class="label">Nom commercial :</td><td class="ligne-continue">{{ $contrat->nom_commercial }}</td></tr>
+            <tr><td class="label">Adresse :</td><td class="ligne-continue">{{ $contrat->client->adresse ?? '' }}</td></tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 90px;">Commune :</td><td class="ligne-continue">{{ $contrat->client->commune ?? '' }}</td>
+                <td class="label" style="width: 60px; padding-left: 15px;">Daïra :</td><td class="ligne-continue" style="width: 35%;">{{ $contrat->client->daira ?? '' }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr><td class="label" style="width: 90px;">Wilaya :</td><td class="ligne-continue">{{ $contrat->client->wilaya ?? '' }}</td></tr>
+            <tr><td class="label">Code postal :</td><td class="ligne-continue">{{ $contrat->client->code_postal ?? '' }}</td></tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 90px;">Téléphone :</td><td class="ligne-continue" style="width: 30%;">{{ $contrat->client->telephone ?? '' }}</td>
+                <td class="label" style="padding-left: 15px; width: 30px;">et</td><td class="ligne-continue" style="width: 30%;"></td>
+            </tr>
+            <tr>
+                <td class="label">Fax :</td><td class="ligne-continue">{{ $contrat->client->fax ?? '' }}</td>
+                <td class="label" style="padding-left: 15px;">et</td><td class="ligne-continue"></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 90px;">Mobile :</td><td class="ligne-continue" style="width: 30%;">{{ $contrat->client->mobile ?? '' }}</td>
+                <td class="label" style="padding-left: 15px; width: 60px;">E.mail :</td><td class="ligne-continue">{{ $contrat->client->email ?? '' }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 110px;">Code activité :</td>
+                <td class="ligne-continue" style="width: 50%;">{{ $contrat->code_activite }}</td>
+                <td></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 100px;">Type TPE :</td>
+                <td style="width: 80px;">
+                    <span class="checkbox">{{ $contrat->type_tpe == 'GPRS' ? 'X' : '' }}</span> GPRS
+                </td>
+                <td style="width: 100px;">
+                    <span class="checkbox">{{ $contrat->type_tpe == 'Filaire' ? 'X' : '' }}</span> Filaire
+                </td>
+                <td class="label" style="padding-left: 50px; width: 170px;">Nombre TPE à installer :</td>
+                <td style="border: 1px solid #000; text-align: center; width: 40px;">{{ $contrat->nombre_tpe_demandes }}</td>
+                <td></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <table>
+            <tr><td class="label" style="width: 170px;">Nom contact principal :</td><td class="ligne-continue">{{ $contrat->nom_contact_principal }}</td></tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 130px;">Type du contact :</td>
+                <td style="width: 180px;">
+                    <span class="checkbox">{{ $contrat->type_contact == 'propriétaire ou gérant' ? 'X' : '' }}</span> propriétaire ou gérant
+                </td>
+                <td>
+                    <span class="checkbox">{{ $contrat->type_contact == 'employé' ? 'X' : '' }}</span> employé
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr><td class="label" style="width: 200px;">Titre de travail du contact :</td><td class="ligne-continue">{{ $contrat->titre_travail_contact }}</td></tr>
+            <tr><td class="label">Nom contact 2 :</td><td class="ligne-continue">{{ $contrat->nom_contact_2 }}</td></tr>
+        </table>
+
+        <br>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 140px;">N° de compte (RIB) :</td>
+                <td class="ligne-continue font-mono" style="letter-spacing: 4px; font-size: 15px;">
+                    <strong>{{ $contrat->numero_rib }}</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">N° de registre de com :</td>
+                <td class="ligne-continue">{{ $contrat->client->registre_commerce ?? '' }}</td>
+            </tr>
+            <tr>
+                <td class="label">N° identifiant fiscal :</td>
+                <td class="ligne-continue">{{ $contrat->client->identifiant_fiscal ?? '' }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td class="label" style="width: 240px;">Nombre d'années du commerce :</td>
+                <td class="ligne-continue" style="width: 100px; text-align: center;">{{ $contrat->client->annees_commerce ?? '' }}</td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
 
 </body>
 </html>
